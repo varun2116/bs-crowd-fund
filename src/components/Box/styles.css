@@ -1,0 +1,11 @@
+.box-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--container-padding);
+    margin: var(--container-margin);
+    background-color: var(--white-bg);
+    border-radius: var(--container-border-radius);
+    box-shadow: var(--card-box-shadow);
+}

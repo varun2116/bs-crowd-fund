@@ -1,17 +1,22 @@
-import React from 'react';
 import { isNil } from 'lodash';
+import React from 'react';
 
 type Props = {
     type: string;
     className?: string;
     placeholder?: string;
     pattern?: string;
-    handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    maxLength?: number;
+    value?: string | number;
+    name?: string;
+    checked?: boolean;
 };
 
-function Input(props: Props) {
-    const { type, className, placeholder, pattern, handleChange } = props;
+type Ref = HTMLInputElement;
 
+const Input = React.forwardRef<Ref, Props>((props, ref) => {
+    const { type, className, placeholder, pattern, onChange } = props;
     /**
      * method restricts the input key based on the pattern from props
      * @param event
@@ -34,10 +39,12 @@ function Input(props: Props) {
                 handleKeyPress(e);
             }}
             onChange={e => {
-                !isNil(handleChange) && handleChange(e);
+                !isNil(onChange) && onChange(e);
             }}
+            {...props}
+            ref={ref}
         />
     );
-}
+});
 
 export default Input;

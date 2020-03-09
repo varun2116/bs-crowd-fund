@@ -1,9 +1,9 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
 import Input from '..';
 import { REG_EXP } from '../../../utils/constants';
-import userEvent from '@testing-library/user-event';
 
 describe('Input Component Test cases', () => {
     test('should render properly', () => {

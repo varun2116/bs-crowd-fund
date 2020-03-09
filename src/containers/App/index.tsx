@@ -5,6 +5,7 @@ import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import './App.css';
 import routes from '../../router';
 import store from '../../store';
+import Header from '../../components/Header';
 
 type Props = {};
 

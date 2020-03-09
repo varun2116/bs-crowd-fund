@@ -17,4 +17,16 @@ describe('Header Component Test cases', () => {
         fireEvent.click(closeBtn);
         expect(closeClick).toHaveBeenCalled();
     });
+
+    test('should call onSearchChange on change input', () => {
+        const closeClick = jest.fn();
+        const onSearchChange = jest.fn();
+        const { getByPlaceholderText } = render(
+            <Search closeClick={closeClick} onSearchChange={onSearchChange} />,
+        );
+
+        const inputSearch = getByPlaceholderText('Search for Bus Stops');
+        fireEvent.change(inputSearch, { target: { value: 'vic' } });
+        expect(onSearchChange).toHaveBeenCalled();
+    });
 });

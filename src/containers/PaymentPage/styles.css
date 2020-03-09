@@ -1,0 +1,43 @@
+.fieldset {
+    border: none;
+}
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-form > .payment-type {
+    border: none;
+}
+
+.payment-user > .payment-input,
+.payment-exp .payment-input {
+    margin-right: 10px;
+}
+
+.payment-exp .payment-input {
+    width: 30px;
+}
+
+.payment-input {
+    font-size: var(--title-font-size);
+    border: 1px solid #999;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.fieldset span {
+    display: none;
+}
+
+.error + span {
+    display: block;
+    color: red;
+}
+
+.error.payment-input {
+    border: 1px solid red;
+}

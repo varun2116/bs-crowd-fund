@@ -1,0 +1,27 @@
+.title {
+    font-size: var(--header-font-size);
+}
+
+.legend {
+    font-size: var(--header-font-size);
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.goal-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.funders {
+    font-size: small;
+    color: #999;
+    display: flex;
+    flex-direction: column;
+}

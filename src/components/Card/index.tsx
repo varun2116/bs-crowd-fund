@@ -1,19 +1,29 @@
 import React from 'react';
-import './styles.css';
-import ProgressBar from '../ProgressBar';
-import Button from '../Button';
-import { CardProps } from './types';
+import { Link } from 'react-router-dom';
 import { calculatePercentage } from '../../utils/utility-functions';
+import Button from '../Button';
+import ProgressBar from '../ProgressBar';
+import './styles.css';
+import { CardProps } from './types';
 
 function Card(props: CardProps) {
-    const { title, goalAmount, amountReceived } = props;
+    const { title, goalAmount, amountReceived, name } = props;
     const percentageFunded = calculatePercentage(amountReceived, goalAmount);
     return (
         <div className="card-container">
             <div className="title">{title}</div>
             <ProgressBar percentage={percentageFunded} />
             <span className="desc">{percentageFunded}% funded</span>
-            <Button type="primary" name="Click Here to Fund" />
+            <Link
+                to={{
+                    pathname: '/details',
+                    state: {
+                        name,
+                    },
+                }}
+            >
+                <Button type="primary" name="Read More..." />
+            </Link>
         </div>
     );
 }

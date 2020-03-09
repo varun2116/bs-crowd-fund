@@ -1,9 +1,13 @@
 import { get } from 'lodash';
 import { connect } from 'react-redux';
-import { BusStopsList, Store } from '../../utils/types';
-import HomePage from './HomePage';
-import { setBusStopsList } from './HomePage.actions';
-import { BUS_STOPS_LISTS, HOME_REDUCER, CHANGE_ID } from './HomePage.constants';
+import { Store, BusStopsList } from '../../utils/types';
+import {
+    BUS_STOPS_LISTS,
+    CHANGE_ID,
+    HOME_REDUCER,
+} from '../HomePage/HomePage.constants';
+import PaymentPage from './PaymentPage';
+import { setBusStopsList } from '../HomePage/HomePage.actions';
 
 export const mapStateToProps = (store: Store) => {
     const homeStore = get(store, HOME_REDUCER);
@@ -21,4 +25,4 @@ const mapDispatchToProps = (dispatch: Function) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentPage);

@@ -1,11 +1,20 @@
+import { isNil } from 'lodash';
 import React, { useState } from 'react';
-import './styles.css';
 import { NavLink } from 'react-router-dom';
 import Button from '../Button';
 import Search from '../Search';
 import { LOGO_TEXT, SEARCH_BUTTON } from './constants';
+import './styles.css';
 
-function Header(props: {}) {
+type Props = {
+    className?: string;
+    noSearch?: boolean;
+    onSearchChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSearchClose?: () => void;
+};
+
+function Header(props: Props) {
+    const { onSearchChange, onSearchClose, noSearch } = props;
     const [displayHeader, setdisplayHeader] = useState(true);
 
     /**
@@ -21,6 +30,9 @@ function Header(props: {}) {
         if (searchBtnClicked) {
             setdisplayHeader(false);
         } else {
+            if (!isNil(onSearchClose)) {
+                onSearchClose();
+            }
             setdisplayHeader(true);
         }
     };
@@ -32,19 +44,24 @@ function Header(props: {}) {
                     <NavLink className="logo" to="/">
                         {LOGO_TEXT}
                     </NavLink>
-                    <Button
-                        type="default"
-                        name={SEARCH_BUTTON}
-                        handleClick={e => {
-                            handleSearchDisplay(e, true);
-                        }}
-                    />
+                    {(isNil(noSearch) || !noSearch) && (
+                        <Button
+                            type="default"
+                            name={SEARCH_BUTTON}
+                            handleClick={e => {
+                                handleSearchDisplay(e, true);
+                            }}
+                        />
+                    )}
                 </div>
             )}
             {!displayHeader && (
                 <Search
                     closeClick={e => {
                         handleSearchDisplay(e);
+                    }}
+                    onSearchChange={e => {
+                        !isNil(onSearchChange) && onSearchChange(e);
                     }}
                 />
             )}

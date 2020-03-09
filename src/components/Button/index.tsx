@@ -1,6 +1,6 @@
+import { isNil } from 'lodash';
 import React from 'react';
 import './styles.css';
-import { isNil } from 'lodash';
 
 type Props = {
     type: string;

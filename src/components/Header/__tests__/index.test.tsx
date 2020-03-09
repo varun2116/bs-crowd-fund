@@ -1,8 +1,8 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Header from '..';
+import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
+import Header from '..';
 import { LOGO_TEXT, SEARCH_BUTTON } from '../constants';
 
 describe('Header Component Test cases', () => {
@@ -42,5 +42,45 @@ describe('Header Component Test cases', () => {
         fireEvent.click(closeBtnElement);
         const logoElement = getByText(LOGO_TEXT);
         expect(logoElement).toBeInTheDocument();
+    });
+});
+
+describe('Header Component Test cases with props', () => {
+    test('should not display search button on "noSearch" prop', () => {
+        const { container } = render(
+            <Router>
+                <Header noSearch />
+            </Router>,
+        );
+        const btnElement = container.getElementsByTagName('button')[0];
+        expect(btnElement).toBeUndefined();
+    });
+
+    test('should call onSearchChange on Search bar input change event', () => {
+        const onSearchChange = jest.fn();
+        const { getByText, getByPlaceholderText } = render(
+            <Router>
+                <Header onSearchChange={onSearchChange} />
+            </Router>,
+        );
+        const btnElement = getByText(SEARCH_BUTTON);
+        fireEvent.click(btnElement);
+        const inputSearch = getByPlaceholderText('Search for Bus Stops');
+        fireEvent.change(inputSearch, { target: { value: 'vic' } });
+        expect(onSearchChange).toHaveBeenCalled();
+    });
+
+    test('should call onSearchClose on Search bar input change event', () => {
+        const onSearchClose = jest.fn();
+        const { getByText } = render(
+            <Router>
+                <Header onSearchClose={onSearchClose} />
+            </Router>,
+        );
+        const btnElement = getByText(SEARCH_BUTTON);
+        fireEvent.click(btnElement);
+        const closeBtnElement = getByText('x');
+        fireEvent.click(closeBtnElement);
+        expect(onSearchClose).toHaveBeenCalled();
     });
 });

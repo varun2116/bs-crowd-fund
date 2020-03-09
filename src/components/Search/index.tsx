@@ -7,10 +7,11 @@ import { REG_EXP } from '../../utils/constants';
 
 type Props = {
     closeClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onSearchChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 function Search(props: Props) {
-    const { closeClick } = props;
+    const { closeClick, onSearchChange } = props;
     return (
         <div className="search-bar">
             <Input
@@ -18,6 +19,9 @@ function Search(props: Props) {
                 className="search-input"
                 placeholder="Search for Bus Stops"
                 pattern={REG_EXP.ALPHA_NUMERIC}
+                onChange={e => {
+                    !isNil(onSearchChange) && onSearchChange(e);
+                }}
             />
             <Button
                 className="btn-close"
