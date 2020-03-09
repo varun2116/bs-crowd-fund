@@ -7,7 +7,7 @@ import {
     HOME_REDUCER,
 } from '../HomePage/HomePage.constants';
 import PaymentPage from './PaymentPage';
-import { setBusStopsList } from '../HomePage/HomePage.actions';
+import { setBusStopsList } from '../../actions';
 
 export const mapStateToProps = (store: Store) => {
     const homeStore = get(store, HOME_REDUCER);

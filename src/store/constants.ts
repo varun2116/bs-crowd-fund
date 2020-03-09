@@ -1,8 +1,7 @@
-import { busStopsList } from '../utils/constants';
 import {
     BUS_STOPS_LISTS,
-    HOME_REDUCER,
     CHANGE_ID,
+    HOME_REDUCER,
 } from '../containers/HomePage/HomePage.constants';
 
 export const initialState = {

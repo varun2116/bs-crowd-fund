@@ -12,13 +12,12 @@ import CardList from '../../components/CardList';
 import Header from '../../components/Header';
 import { httpServices } from '../../utils/http-services';
 import { BusStopDetails } from '../../utils/types';
+import {
+    getLocalStorageData,
+    setLocalStorageData,
+} from '../../utils/utility-functions';
 import { CHANGE_ID } from './HomePage.constants';
 import { HomePageProps, HomePageState } from './HomePage.types';
-import PaymentPage from '../PaymentPage';
-import {
-    setLocalStorageData,
-    getLocalStorageData,
-} from '../../utils/utility-functions';
 
 class HomePage extends Component<HomePageProps, HomePageState> {
     constructor(props: HomePageProps) {

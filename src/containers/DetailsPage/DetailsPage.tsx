@@ -1,12 +1,12 @@
+import { get, isEmpty, map, uniqueId } from 'lodash';
 import React, { Component } from 'react';
-import Header from '../../components/Header';
-import Box from '../../components/Box';
-import './styles.css';
-import { BusStopDetails, BusStopsList, Funders } from '../../utils/types';
-import { get, map, isEmpty, uniqueId } from 'lodash';
-import Button from '../../components/Button';
-import { listSearch } from '../../utils/utility-functions';
 import { Link, Redirect } from 'react-router-dom';
+import Box from '../../components/Box';
+import Button from '../../components/Button';
+import Header from '../../components/Header';
+import { BusStopsList, Funders } from '../../utils/types';
+import { listSearch } from '../../utils/utility-functions';
+import './styles.css';
 
 type DetailsPageProps = {
     location: { state?: { name: string } };

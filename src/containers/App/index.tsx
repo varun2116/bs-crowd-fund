@@ -1,11 +1,10 @@
 import { map, uniqueId } from 'lodash';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Route, Switch, HashRouter as Router } from 'react-router-dom';
-import './App.css';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from '../../router';
 import store from '../../store';
-import Header from '../../components/Header';
+import './App.css';
 
 type Props = {};
 

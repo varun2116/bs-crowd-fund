@@ -1,22 +1,22 @@
+import { get, isEmpty, isEqual } from 'lodash';
 import React, { Component } from 'react';
-import './styles.css';
+import { Link, Redirect } from 'react-router-dom';
 import Box from '../../components/Box';
-import Input from '../../components/Input';
-import { REG_EXP } from '../../utils/constants';
 import Button from '../../components/Button';
-import { get, isEqual, isEmpty, toNumber } from 'lodash';
-import { REF_CURRENT_VALUE_PATH } from './PaymentPage.constants';
-import { BusStopDetails, BusStopsList } from '../../utils/types';
 import Header from '../../components/Header';
-import { httpServices } from '../../utils/http-services';
+import Input from '../../components/Input';
 import {
     Modal,
-    ModalHeader,
     ModalBody,
     ModalFooter,
+    ModalHeader,
 } from '../../components/Modal';
-import { Link } from 'react-router-dom';
+import { REG_EXP } from '../../utils/constants';
+import { httpServices } from '../../utils/http-services';
+import { BusStopsList } from '../../utils/types';
 import { getLocalStorageData } from '../../utils/utility-functions';
+import { REF_CURRENT_VALUE_PATH } from './PaymentPage.constants';
+import './styles.css';
 
 type PaymentPageProps = {
     location: { state?: { name: string } };
@@ -27,6 +27,7 @@ type PaymentPageProps = {
 type PaymentPageState = {
     showModal: boolean;
     message: string;
+    redirect: boolean;
 };
 
 class PaymentPage extends Component<PaymentPageProps, PaymentPageState> {
@@ -35,6 +36,7 @@ class PaymentPage extends Component<PaymentPageProps, PaymentPageState> {
         this.state = {
             showModal: false,
             message: '',
+            redirect: false,
         };
     }
 
@@ -46,6 +48,16 @@ class PaymentPage extends Component<PaymentPageProps, PaymentPageState> {
     private cvvRef = React.createRef<HTMLInputElement>();
     private mmRef = React.createRef<HTMLInputElement>();
     private yyRef = React.createRef<HTMLInputElement>();
+
+    componentDidMount() {
+        const { location } = this.props;
+        const name = get(location, ['state', 'name'], '');
+        if (isEmpty(name)) {
+            this.setState({
+                redirect: true,
+            } as PaymentPageState);
+        }
+    }
 
     /**
      * Resets Form Validations
@@ -86,7 +98,7 @@ class PaymentPage extends Component<PaymentPageProps, PaymentPageState> {
             isValid = false;
             this.paymentTypeRef.current?.classList.add('error');
         }
-        if (isEqual(amount, false) || isEmpty(amount) || amount > 700) {
+        if (isEqual(amount, false) || isEmpty(amount) || amount > 1000) {
             isValid = false;
             this.amountRef.current?.classList.add('error');
         }
@@ -187,6 +199,10 @@ class PaymentPage extends Component<PaymentPageProps, PaymentPageState> {
     render() {
         const { location } = this.props;
         const name: string = get(location, ['state', 'name'], '');
+        const { redirect } = this.state;
+        if (redirect) {
+            return <Redirect to="/" />;
+        }
         return (
             <React.Fragment>
                 <Header noSearch />
