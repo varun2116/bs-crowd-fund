@@ -14,7 +14,6 @@ describe('Header Component Test cases', () => {
     const props = {
         location: { state: { name: '01112' } },
     };
-    const history = createMemoryHistory();
     test('should render properly', () => {
         const { container } = renderWithRouterRedux(<DetailsPage {...props} />);
         expect(container).toBeInTheDocument();
